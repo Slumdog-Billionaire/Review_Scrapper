@@ -6,15 +6,15 @@ from urllib.request import urlopen as uReq
 
 app = Flask(__name__)
 
-@app.route('/',methods=['GET'])  # route to display the home page
-@cross_origin()
+@app.route('/',methods=['GET'])  # route to display the home page #home route /
+@cross_origin()#not required in local deployment.  #required when deployment is on cloud. used as a decorator. to establish communication between 2 origin.
 def homePage():
-    return render_template("index.html")
+    return render_template("index.html") # whatever form we have created it will be rendered. #index.html page available in templates.
 
 @app.route('/review',methods=['POST','GET']) # route to show the review comments in a web UI
 @cross_origin()
 def index():
-    if request.method == 'POST':
+    if request.method == 'POST': #sending information via body. 
         try:
             searchString = request.form['content'].replace(" ","")
             flipkart_url = "https://www.flipkart.com/search?q=" + searchString
